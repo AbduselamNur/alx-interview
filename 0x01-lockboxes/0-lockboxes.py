@@ -9,18 +9,18 @@ def canUnlockAll(boxes):
     """
     a method that determines if all the boxes can be opened.
     """
-    n = len(boxes)
-    visited = [False] * n
-    visited[0] = True
+    total_boxes = len(boxes)
+    unlocked = [False] * total_boxes
+    unlocked[0] = True
+    keys = [key for key in boxes[0] if key < total_boxes]
 
-    queue = deque([0])
+    while keys:
+        new_keys = []
+        for key in keys:
+            if not unlocked[key]:
+                unlocked[key] = True
+                new_keys += [new_key for new_key in boxes[key]
+                             if new_key < total_boxes]
+        keys = new_keys
 
-    while queue:
-        current_box = queue.popleft()
-
-        for key in boxes[current_box]:
-            if not visited[key]:
-                visited[key] = True
-                queue.append(key)
-
-    return all(visited)
+    return all(unlocked)
