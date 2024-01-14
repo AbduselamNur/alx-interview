@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-from collections import deque
 """
 Lockboxes
 """
+from collections import deque
 
 
 def canUnlockAll(boxes):
